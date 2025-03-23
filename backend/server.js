@@ -11,7 +11,7 @@ dotenv.config();
 const app = express();
 
 // Middleware
-const allowedOrigins = ['https://work-spots.vercel.app', 'http://localhost:3000'];
+const allowedOrigins = ['work-spot-rouge.vercel.app', 'http://localhost:3000'];
 
 app.use(cors({
   origin: (origin, callback) => {
