@@ -50,8 +50,8 @@ export default function Home() {
       try {
         setError(null);
 
-        const API_URL =
-          process.env.API_URL || "http://localhost:5000/api";
+        const NEXT_PUBLIC_API_URL =
+          process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
         const queryParams = new URLSearchParams({
           page: currentPage.toString(),
           limit: spacesPerPage.toString(),
@@ -63,7 +63,7 @@ export default function Home() {
           ...(priceRange[1] < 5000 && { maxPrice: priceRange[1].toString() }),
         });
 
-        const response = await fetch(`${API_URL}/spaces?${queryParams}`, {
+        const response = await fetch(`${NEXT_PUBLIC_API_URL}/spaces?${queryParams}`, {
           next: { revalidate: 60 },
         });
 

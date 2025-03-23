@@ -23,13 +23,13 @@ const initialState: AuthState = {
   error: null,
 };
 
-const API_URL = process.env.API_URL || 'http://localhost:5000/api';
+const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
 export const login = createAsyncThunk(
   'auth/login',
   async (credentials: LoginInput, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`${API_URL}/auth/login`, credentials);
+      const response = await axios.post(`${NEXT_PUBLIC_API_URL}/auth/login`, credentials);
       return response.data;
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
@@ -44,7 +44,7 @@ export const signup = createAsyncThunk(
   'auth/signup',
   async (userData: { name: string; email: string; password: string }, { rejectWithValue }) => {
     try {
-      const response = await fetch(`${API_URL}/auth/signup`, {
+      const response = await fetch(`${NEXT_PUBLIC_API_URL}/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData),
@@ -67,7 +67,7 @@ export const googleLogin = createAsyncThunk(
   'auth/googleLogin',
   async (token: string, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`${API_URL}/auth/google`, { token });
+      const response = await axios.post(`${NEXT_PUBLIC_API_URL}/auth/google`, { token });
       return response.data;
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {

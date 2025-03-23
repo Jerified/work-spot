@@ -36,7 +36,7 @@ function SearchPageContent() {
         setLoading(true);
         setError(null);
         
-        const API_URL = process.env.API_URL || 'http://localhost:5000/api';
+        const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
         const queryParams = new URLSearchParams({
           page: currentPage.toString(),
           limit: spacesPerPage.toString(),
@@ -47,7 +47,7 @@ function SearchPageContent() {
         });
         
         console.log('Fetching spaces with params:', Object.fromEntries(queryParams));
-        const url = `${API_URL}/spaces?${queryParams}`;
+        const url = `${NEXT_PUBLIC_API_URL}/spaces?${queryParams}`;
         console.log('API URL:', url);
         
         const response = await fetch(url, {
