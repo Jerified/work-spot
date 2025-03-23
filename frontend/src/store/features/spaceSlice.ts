@@ -43,7 +43,7 @@ export const fetchSpaces = createAsyncThunk(
   'spaces/fetchSpaces',
   async (filters: Filters | undefined, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${NEXT_PUBLIC_API_URL}/spaces`, { params: filters });
+      const response = await axios.get(`${NEXT_PUBLIC_API_URL}/api/spaces`, { params: filters });
       return response.data;
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
@@ -58,7 +58,7 @@ export const updateSpace = createAsyncThunk(
   'spaces/updateSpace',
   async ({ id, data }: { id: string; data: Partial<Space> }, { rejectWithValue }) => {
     try {
-      const response = await axios.patch(`${NEXT_PUBLIC_API_URL}/spaces/${id}`, data);
+      const response = await axios.patch(`${NEXT_PUBLIC_API_URL}/api/spaces/${id}`, data);
       return response.data;
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {

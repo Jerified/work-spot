@@ -63,7 +63,7 @@ export default function Home() {
           ...(priceRange[1] < 5000 && { maxPrice: priceRange[1].toString() }),
         });
 
-        const response = await fetch(`${NEXT_PUBLIC_API_URL}/spaces?${queryParams}`, {
+        const response = await fetch(`${NEXT_PUBLIC_API_URL}/api/spaces?${queryParams}`, {
           next: { revalidate: 60 },
         });
 

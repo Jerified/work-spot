@@ -47,7 +47,7 @@ function SearchPageContent() {
         });
         
         console.log('Fetching spaces with params:', Object.fromEntries(queryParams));
-        const url = `${NEXT_PUBLIC_API_URL}/spaces?${queryParams}`;
+        const url = `${NEXT_PUBLIC_API_URL}/api/spaces?${queryParams}`;
         console.log('API URL:', url);
         
         const response = await fetch(url, {
