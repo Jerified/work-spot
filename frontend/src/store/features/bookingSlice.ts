@@ -41,7 +41,7 @@ export const createBooking = createAsyncThunk(
     specialRequests?: string;
   }, { rejectWithValue }) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/bookings`, {
+      const response = await fetch(`${process.env.API_URL}/api/bookings`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ export const fetchUserBookings = createAsyncThunk(
   'bookings/fetchUserBookings',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/bookings`, {
+      const response = await fetch(`${process.env.API_URL}/api/bookings`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },

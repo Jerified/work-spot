@@ -37,7 +37,7 @@ const initialState: SpaceState = {
   selectedSpace: null,
 };
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.API_URL;
 
 export const fetchSpaces = createAsyncThunk(
   'spaces/fetchSpaces',

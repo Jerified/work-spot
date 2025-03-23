@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { LoginInput, SignupInput, ForgotPasswordInput, ResetPasswordInput } from '../lib/validations/auth';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+const API_URL = process.env.API_URL || 'http://localhost:5000/api';
 
 export const authService = {
   async login(data: LoginInput) {

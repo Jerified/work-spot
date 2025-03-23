@@ -36,7 +36,7 @@ function SearchPageContent() {
         setLoading(true);
         setError(null);
         
-        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+        const API_URL = process.env.API_URL || 'http://localhost:5000/api';
         const queryParams = new URLSearchParams({
           page: currentPage.toString(),
           limit: spacesPerPage.toString(),
