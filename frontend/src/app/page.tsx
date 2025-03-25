@@ -7,6 +7,7 @@ import { fetchSpaces } from "../store/features/spaceSlice";
 import SearchBar from "../components/SearchBar"
 import FilterBar from "../components/FilterBar";
 import SpacesGrid from "../components/SpacesGrid";
+import { HomeSkeleton } from "../components/skeleton";
 import { ErrorUI } from "../components/errorUI";
 import { Button } from "../components/ui/button";
 import { ArrowRight, Building2, Clock, MapPin, Users } from "lucide-react";
@@ -15,7 +16,7 @@ import React from "react";
 
 export default function Home() {
   const dispatch = useDispatch<AppDispatch>();
-  const { spaces: reduxSpaces, error: reduxError } = useSelector(
+  const { spaces: reduxSpaces, error: reduxError, loading: reduxLoading } = useSelector(
     (state: RootState) => state.spaces
   );
   const [searchQuery, setSearchQuery] = useState("");
@@ -24,6 +25,7 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const spacesPerPage = 6;
 
   const handleFilterChange = useCallback((amenities: string[], price: [number, number]) => {
@@ -48,6 +50,7 @@ export default function Home() {
   useEffect(() => {
     const fetchSpacesData = async () => {
       try {
+        setIsLoading(true);
         setError(null);
 
         const NEXT_PUBLIC_API_URL =
@@ -73,9 +76,11 @@ export default function Home() {
 
         const data = await response.json();
         setTotalPages(Math.ceil((data.total || data.length || 0) / spacesPerPage));
+        setIsLoading(false);
       } catch (err) {
         console.error("Error fetching spaces:", err);
         setError(err instanceof Error ? err.message : "An error occurred");
+        setIsLoading(false);
       }
     };
 
@@ -232,12 +237,16 @@ export default function Home() {
           </div>
         </section>
 
-        <SpacesGrid
-          spaces={paginatedSpaces}
-          totalPages={calculatedTotalPages || totalPages}
-          currentPage={currentPage}
-          onPageChange={handlePageChange}
-        />
+        {isLoading || reduxLoading ? (
+          <HomeSkeleton />
+        ) : (
+          <SpacesGrid
+            spaces={paginatedSpaces}
+            totalPages={calculatedTotalPages || totalPages}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+          />
+        )}
       </Container>
     </main>
   );
